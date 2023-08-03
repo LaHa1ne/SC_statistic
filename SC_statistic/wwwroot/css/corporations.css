@@ -1,0 +1,106 @@
+﻿.search-corporation-container {
+    position: relative;
+    padding-bottom: 40px;
+}
+
+#corporation_name_or_tag {
+    background-color: #495057;
+    color: #ffffff;
+}
+
+#name-or-tag-filter-select {
+    padding: 5px;
+    background-color: #343a40;
+    color: white; 
+    border: none; 
+    border-radius: 2px; 
+    border: 1px solid white;
+}
+
+.corporation-notification {
+    top: 40px;
+    padding: 5px 10px;
+    color: #ffffff;
+    visibility: hidden;
+    background: none;
+}
+
+.corporation-info-container{
+    visibility: hidden;
+}
+.corp-main-info h2 {
+    font-size: 28px;
+}
+
+.corp-main-info p {
+    margin: 5px 0; 
+}
+
+.corp-main-info .pvp-rating,
+.corp-main-info .pve-rating {
+    display: inline; 
+    margin-right: 10px;
+}
+
+.corporation-players-container {
+    display: flex;
+    justify-content: center; 
+}
+
+.corporation-players-container .table-wrapper {
+    max-height: 300px;
+    overflow: auto; 
+    width: 500px; 
+    margin: 0 auto;
+}
+
+.corporation-players-container .table {
+    background-color: #343a40;
+    color: white;
+}
+
+    .corporation-players-container .table th {
+        border-top: none;
+        border-bottom: 1px solid white;
+        background-color: #343a40; 
+        color: white;
+        position: sticky;
+        top: 0; 
+        z-index: 1;
+    }
+
+    .corporation-players-container .table td {
+        border-top: none;
+        border-bottom: 1px solid white;
+    }
+
+.corporation-players-container .status-actual {
+    color: green;
+}
+
+.corporation-players-container .status-update {
+    color: red;
+}
+
+.corporation-players-container .corp-players {
+    padding: 0;
+}
+
+.corporation-players-container .table-wrapper::-webkit-scrollbar {
+    width: 8px; 
+}
+
+.corporation-players-container .table-wrapper::-webkit-scrollbar-thumb {
+    background-color: #888; 
+    border-radius: 10px; 
+}
+
+#player-table tr[name="empty_player"]{
+    display: none;
+}
+
+
+
+
+
+

@@ -1,0 +1,15 @@
+﻿@model SC_statistic.DataLayer.ViewModels.Account.LoginViewModel
+<form id="registrationForm" class="w-50" asp-controller="Account" asp-action="Login">
+    <div asp-validation-summary="ModelOnly" class="account_warning">
+    </div>
+    <div class="mb-4">
+        <label asp-for="Login">Логин</label>
+        <input class="form-control" placeholder="Логин" asp-for="Login" type="text" required />
+        <span asp-validation-for="Login" class="account_warning"></span>
+    </div>
+    <div class="mb-4">
+        <label asp-for="Password">Пароль</label>
+        <input class="form-control" placeholder="Пароль" asp-for="Password" type="password" required />
+        <span asp-validation-for="Password" class="account_warning"></span>
+    </div>
+</form>

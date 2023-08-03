@@ -1,0 +1,43 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+header {
+    height: 62px;
+}
+
+header nav{
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    background-color: #343a40;
+}
+
+#mainContainer {
+    height:calc(100% - 123px);
+}
+
+main {
+    height: 100%;
+}
+
+footer {
+    height: 61px;
+}

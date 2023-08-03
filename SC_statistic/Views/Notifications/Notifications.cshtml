@@ -1,0 +1,67 @@
+﻿@model SC_statistic.DataLayer.DTO.Notifications.NotificationListDTO 
+<div class="list-container">
+    <div class="filter-container">
+        <div>
+            <select id="notification-filter-select" class="filter-select" onchange="ChangeNotificationType()">
+                <option value="all">Все уведомления</option>
+                <option value="playerChangedNickname">Переименование игроков</option>
+                <option value="corporationChangedName">Переименование корпораций</option>
+                <option value="playerChangedCorporation">Смена корпорации</option>
+                <option value="system">Системные</option>
+            </select>
+        </div>
+        <div>
+            @if (Model.HasMoreNotifications)
+            {
+                <button class="load-more-btn" id="load_more_notifications" onclick="LoadMoreNotifications()">
+                    <span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span>
+                        <span class="load-more-text">Загрузить еще</span>
+                </button>
+            }
+            else
+            {
+                <button class="load-more-btn" style="display: none" id="load_more_notifications" onclick="LoadMoreNotifications()">
+                    <span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span>
+                    <span class="load-more-text">Загрузить еще</span>
+                </button>
+            }
+        </div>
+    </div>
+
+    <ul class="notification-list">
+        @foreach (var notification in Model.Notifications)
+        {
+            switch(notification.Type)
+            {
+                case SC_statistic.DataLayer.Enums.NotificationType.PlayerChangedNickname:
+                    <li class="red" name="@notification.NotificationId">
+                        <div class="list-text">@notification.Text</div>
+                        <div class="date">@notification.Date</div>
+                    </li>
+                    break;
+                case SC_statistic.DataLayer.Enums.NotificationType.PlayerChangedCorporation:
+                    <li class="blue" name="@notification.NotificationId">
+                        <div class="list-text">@notification.Text</div>
+                        <div class="date">@notification.Date</div>
+                    </li>
+                    break;
+                case SC_statistic.DataLayer.Enums.NotificationType.CorporationChangedName:
+                    <li class="green" name="@notification.NotificationId">
+                        <div class="list-text">@notification.Text</div>
+                        <div class="date">@notification.Date</div>
+                    </li>
+                    break;
+                default:
+                    <li class="yellow" name="@notification.NotificationId">
+                        <div class="list-text">@notification.Text</div>
+                        <div class="date">@notification.Date</div>
+                    </li>
+                    break;
+            }
+        }
+        <li class="" name="empty_notification">
+            <div class="list-text"></div>
+            <div class="date"></div>
+        </li>
+    </ul>
+</div>

@@ -1,0 +1,42 @@
+﻿.hidden-text {
+    visibility: hidden;
+}
+
+.search-player-container {
+    position: relative;
+    padding-bottom: 40px;
+}
+
+#player_nickname {
+    background-color: #495057;
+    color: #ffffff;
+}
+
+.history-container{
+    visibility: hidden;
+}
+
+    .history-container ul {
+        background-color: #495057;
+    }
+
+    .history-container li {
+        color: #ffffff;
+        background-color: #495057;
+    }
+
+.player-notification {
+    
+    top: 40px;
+    
+    padding: 5px 10px;
+    color: #ffffff;
+    visibility: hidden;
+    background: none;
+    
+}
+
+
+#nickname-list li[name="empty_nickname"], #corporation-list li[name="empty_corporation"] {
+    display: none;
+}

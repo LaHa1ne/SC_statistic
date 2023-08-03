@@ -1,0 +1,53 @@
+﻿<div class="container mt-5">
+    <!-- Поле для ввода строки и кнопка поиска -->
+    <div class="row justify-content-center">
+        <div class="col-md-6 search-corporation-container">
+            <div class="input-group mb-1">
+                <input type="text" class="form-control" id="corporation_name_or_tag" placeholder="Тег" aria-label="Тег_или_Название" aria-describedby="basic-addon2">
+                <div class="input-group-append">
+                    <select id="name-or-tag-filter-select" class="filter-select" onchange="ChangeCorpFilter()">
+                        <option value="tag">Тег</option>
+                        <option value="name">Название</option>
+                    </select>
+                    <button class="btn btn-outline-light search-corporation-button" type="button" onclick="FindCorporation()"><i class="bi bi-search"></i></button>
+                </div>
+            </div>
+            <!-- Скрытый элемент уведомления -->
+            <div class="corporation-notification hidden-text">
+            </div>
+        </div>
+    </div>
+
+    <div class="corporation-info-container">
+    <div class="row corp-container">
+        <div class="col-md-12">
+            <div class="corp-main-info">
+                <h2 class="text-center text-white">Название корпорации</h2>
+                <p class="text-center text-white">Pvp рейтинг: <span class="pvp-rating"></span> Pve рейтинг: <span class="pve-rating"></span></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row corporation-players-container justify-content-center">
+        <div class="col-md-12">
+            <div class="table-wrapper">
+                <table class="table text-center mx-auto" id="player-table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Никнейм</th>
+                            <th scope="col">Статус</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr name="empty_player">
+                            <td name="nickname"></td>
+                            <td name="status"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    </div>
+</div>
+

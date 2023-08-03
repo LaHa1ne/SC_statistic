@@ -1,0 +1,38 @@
+﻿<div class="container mt-5">
+    <!-- Поле для ввода строки и кнопка поиска -->
+    <div class="row justify-content-center">
+        <div class="col-md-6 search-player-container">
+            <div class="input-group mb-1">
+                <input type="text" class="form-control" id="player_nickname" placeholder="Никнейм" aria-label="Никнейм" aria-describedby="basic-addon2">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-light search-player-button" type="button" onclick="Find_player_history()"><i class="bi bi-search"></i></button>
+                </div>
+            </div>
+            <!-- Скрытый элемент уведомления -->
+            <div class="player-notification hidden-text">
+            </div>
+        </div>
+    </div>
+
+    <!-- Списки "Никнеймы" и "Корпорации" -->
+    <div class="row history-container">
+        <div class="col-md-6">
+            <h4 class="text-center text-white">Никнеймы</h4>
+            <ul class="list-group" id="nickname-list">
+                <li class="list-group-item justify-content-between align-items-center" name="empty_nickname">
+                    <span name="nickname"></span>
+                    <span name="date"></span>
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-6">
+            <h4 class="text-center text-white">Корпорации</h4>
+            <ul class="list-group" id="corporation-list">
+                <li class="list-group-item justify-content-between align-items-center" name="empty_corporation">
+                    <span name="nameAndTag"></span>
+                    <span name="date"></span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
