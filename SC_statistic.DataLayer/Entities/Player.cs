@@ -15,6 +15,19 @@ namespace SC_statistic.DataLayer.Entities
 
         public List<PlayerNicknameHistory> NicknameHistory { get; set; } = new List<PlayerNicknameHistory>();
         public List<PlayerCorporationHistory> CorporationHistory { get; set; } = new List<PlayerCorporationHistory>();
-        public Corporation? CurrentCorporation { get; set; }
+
+        protected Corporation? _currentCorporation;
+        public Corporation? CurrentCorporation
+        {
+            /*get; set;*/
+            get => _currentCorporation;
+            set
+            {
+                _currentCorporation = value;
+                CurrentCorporationId = value == null ? null : value.CorporationId;
+            }
+        }
+        public List<TrackedPlayer> TrackedPlayers { get; set; } = new List<TrackedPlayer>();
+
     }
 }

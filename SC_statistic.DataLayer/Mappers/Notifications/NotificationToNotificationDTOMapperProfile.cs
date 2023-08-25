@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SC_statistic.DataLayer.Mappers
+namespace SC_statistic.DataLayer.Mappers.Notifications
 {
     public class NotificationToNotificationDTOMapperProfile : Profile
     {

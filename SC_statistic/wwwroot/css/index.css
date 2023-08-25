@@ -1,0 +1,95 @@
+﻿.index-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+.caption-container {
+    text-align: center;
+    width: 80%;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 50px;
+    margin-bottom: 40px;
+}
+.caption-shadow {
+    font-size: 3rem;
+    color: white;
+    text-shadow: 2px 2px gray;
+    font-family: Arial, sans-serif;
+}
+.subcaption-shadow {
+    font-size: 1.5rem;
+    color: white;
+    text-shadow: 1px 1px gray;
+    font-style: italic;
+}
+.functional-list {
+    color: white;
+    font-size: 1.2rem;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    height: calc(100% - 230px)
+}
+@media (max-width: 768px) {
+    .functional-list {
+        height: calc(100% - 279.5px)
+    }
+}
+.functional-list .functional-list-container {
+    height: calc(100% - 44px);
+    overflow-y: auto;
+}
+
+    .functional-list .functional-list-container::-webkit-scrollbar {
+        width: 10px;
+    }
+
+    .functional-list .functional-list-container::-webkit-scrollbar-thumb {
+        background-color: gray;
+        border-radius: 5px;
+    }
+
+    .functional-list .functional-list-container::-webkit-scrollbar-track {
+        background-color: #333;
+        border-radius: 5px;
+    }
+
+
+.functional-list ul {
+    text-align: left;
+    color: white;
+    padding-left: 0;
+    list-style-type: none;
+}
+        .functional-list>ul {
+        }
+    .functional-list .li-func {
+        background-color: #495057;
+        padding: 8px;
+        border-radius: 15px;
+        font-size: 1.2rem;
+    }
+
+.functional-list .li-func:not(:last-child) {
+    margin-bottom: 0.4rem;
+}
+    .functional-list .li-func .subli-func {
+            font-size: 1rem;
+            padding-left: 30px;
+        }
+
+    .functional-list .list-title {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: white;
+        margin-bottom: 0.5rem;
+        text-align: center;
+    }
+
+.centered-ul {
+    text-align: left;
+    padding-left: 0;
+    list-style-type: none;
+}

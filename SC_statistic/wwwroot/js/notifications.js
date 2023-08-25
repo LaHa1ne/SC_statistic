@@ -12,12 +12,12 @@
                 var notification_list = $('.notification-list');
                 notification_list.find('li:not(:last-child)').remove();
                 AddNotificationsFronJsonList(response.data.notifications, "end");
-                if (response.data.hasMoreNotifications) $("#load_more_notifications").css('display', 'inline-block');
-                else $("#load_more_notifications").css('display', 'none');
+                if (response.data.hasMoreNotifications) $("#load_more_notifications").css('visibility', 'visible');
+                else $("#load_more_notifications").css('visibility', 'hidden');
             }
         },
         error: function (jqXHR, exception) {
-            alert("Ошибка");
+            alert("Ошибка"); //Пока что заглушка
         }
     });
 }
@@ -35,12 +35,12 @@ function LoadMoreNotifications() {
         success: function (response) {
             if (response.statusCode == 200) {
                 AddNotificationsFronJsonList(response.data.notifications, "begin");
-                if (response.data.hasMoreNotifications) $("#load_more_notifications").css('display', 'inline-block');
-                else $("#load_more_notifications").css('display', 'none');
+                if (response.data.hasMoreNotifications) $("#load_more_notifications").css('visibility', 'visible');
+                else $("#load_more_notifications").css('visibility', 'hidden');
             }
         },
         error: function (jqXHR, exception) {
-            alert("Ошибка");
+            alert("Ошибка");   //Пока что заглушка
         }
     });
 }

@@ -74,8 +74,7 @@ namespace SC_statistic.Migrations
                     CurrentNickname = table.Column<string>(type: "varchar(16)", maxLength: 16, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     IsInformationCorrect = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    CurrentCorporationId = table.Column<long>(type: "bigint", nullable: true),
-                    UserId = table.Column<Guid>(type: "char(36)", nullable: true, collation: "ascii_general_ci")
+                    CurrentCorporationId = table.Column<long>(type: "bigint", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -85,11 +84,6 @@ namespace SC_statistic.Migrations
                         column: x => x.CurrentCorporationId,
                         principalTable: "corporations",
                         principalColumn: "CorporationId");
-                    table.ForeignKey(
-                        name: "FK_players_users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "users",
-                        principalColumn: "UserId");
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -143,73 +137,91 @@ namespace SC_statistic.Migrations
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
-            migrationBuilder.InsertData(
-                table: "corporations",
-                columns: new[] { "CorporationId", "CurrentName", "CurrentTag", "PveRating", "PvpRating" },
-                values: new object[,]
+            migrationBuilder.CreateTable(
+                name: "trackedplayers",
+                columns: table => new
                 {
-                    { 4505L, "44cd", "4CB", 50, 10 },
-                    { 5861L, "Lamento el Teaming", "LET", 12652, 19313 }
-                });
-
-            migrationBuilder.InsertData(
-                table: "notifications",
-                columns: new[] { "NotificationId", "Date", "Text", "Type" },
-                values: new object[,]
+                    TrackedPlayerId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
+                    PlayerId = table.Column<long>(type: "bigint", nullable: false),
+                    UserId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci")
+                },
+                constraints: table =>
                 {
-                    { 1L, new DateTime(2023, 7, 17, 18, 50, 1, 737, DateTimeKind.Local).AddTicks(4646), "Системное1", 3 },
-                    { 2L, new DateTime(2023, 7, 17, 18, 50, 2, 737, DateTimeKind.Local).AddTicks(4659), "Игрок1", 0 },
-                    { 3L, new DateTime(2023, 7, 17, 18, 50, 3, 737, DateTimeKind.Local).AddTicks(4660), "Смена корп1", 2 },
-                    { 4L, new DateTime(2023, 7, 17, 18, 50, 4, 737, DateTimeKind.Local).AddTicks(4661), "Смена назв1", 1 },
-                    { 5L, new DateTime(2023, 7, 17, 18, 50, 5, 737, DateTimeKind.Local).AddTicks(4662), "Системное2", 3 },
-                    { 6L, new DateTime(2023, 7, 17, 18, 50, 6, 737, DateTimeKind.Local).AddTicks(4665), "Игрок2", 0 },
-                    { 7L, new DateTime(2023, 7, 17, 18, 50, 7, 737, DateTimeKind.Local).AddTicks(4666), "Смена корп2", 2 },
-                    { 8L, new DateTime(2023, 7, 17, 18, 50, 8, 737, DateTimeKind.Local).AddTicks(4667), "Смена назв2", 1 },
-                    { 9L, new DateTime(2023, 7, 17, 18, 50, 9, 737, DateTimeKind.Local).AddTicks(4668), "Системное3", 3 },
-                    { 10L, new DateTime(2023, 7, 17, 18, 50, 10, 737, DateTimeKind.Local).AddTicks(4669), "Игрок3", 0 },
-                    { 11L, new DateTime(2023, 7, 17, 18, 50, 11, 737, DateTimeKind.Local).AddTicks(4670), "Смена корп3", 2 },
-                    { 12L, new DateTime(2023, 7, 17, 18, 50, 12, 737, DateTimeKind.Local).AddTicks(4671), "Смена назв3", 1 },
-                    { 13L, new DateTime(2023, 7, 17, 18, 50, 13, 737, DateTimeKind.Local).AddTicks(4672), "Системное4", 3 },
-                    { 14L, new DateTime(2023, 7, 17, 18, 50, 14, 737, DateTimeKind.Local).AddTicks(4673), "Игрок4", 0 },
-                    { 15L, new DateTime(2023, 7, 17, 18, 50, 15, 737, DateTimeKind.Local).AddTicks(4674), "Смена корп4", 2 },
-                    { 16L, new DateTime(2023, 7, 17, 18, 50, 16, 737, DateTimeKind.Local).AddTicks(4675), "Смена назв4", 1 }
-                });
+                    table.PrimaryKey("PK_trackedplayers", x => x.TrackedPlayerId);
+                    table.ForeignKey(
+                        name: "FK_trackedplayers_players_PlayerId",
+                        column: x => x.PlayerId,
+                        principalTable: "players",
+                        principalColumn: "PlayerId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_trackedplayers_users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "users",
+                        principalColumn: "UserId",
+                        onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
 
-            migrationBuilder.InsertData(
-                table: "players",
-                columns: new[] { "PlayerId", "CurrentCorporationId", "CurrentNickname", "IsInformationCorrect", "UserId" },
-                values: new object[] { 585650L, 4505L, "fantazm", true, null });
-
-            migrationBuilder.InsertData(
-                table: "players",
-                columns: new[] { "PlayerId", "CurrentCorporationId", "CurrentNickname", "IsInformationCorrect", "UserId" },
-                values: new object[] { 2177186L, 4505L, "AggressiveStyle", true, null });
-
-            migrationBuilder.InsertData(
-                table: "playercorporationhistories",
-                columns: new[] { "PlayerCorporationHistoryId", "CorporationId", "Date", "PlayerId" },
-                values: new object[,]
+            migrationBuilder.CreateTable(
+                name: "sessions",
+                columns: table => new
                 {
-                    { 1L, null, new DateTime(2014, 5, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), 585650L },
-                    { 2L, 4505L, new DateTime(2020, 3, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), 585650L },
-                    { 3L, 4505L, new DateTime(2022, 7, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), 2177186L }
-                });
-
-            migrationBuilder.InsertData(
-                table: "playernicknamehistories",
-                columns: new[] { "PlayerNicknameHistoryId", "Date", "Nickname", "PlayerId" },
-                values: new object[,]
+                    SessionId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
+                    Name = table.Column<string>(type: "varchar(12)", maxLength: 12, nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    StartDate = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    TrackedPlayerId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci")
+                },
+                constraints: table =>
                 {
-                    { 1L, new DateTime(2015, 7, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), "Ala", 585650L },
-                    { 2L, new DateTime(2019, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "fantazm", 585650L },
-                    { 3L, new DateTime(2021, 7, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), "AggressiveStyle", 2177186L }
-                });
+                    table.PrimaryKey("PK_sessions", x => x.SessionId);
+                    table.ForeignKey(
+                        name: "FK_sessions_trackedplayers_TrackedPlayerId",
+                        column: x => x.TrackedPlayerId,
+                        principalTable: "trackedplayers",
+                        principalColumn: "TrackedPlayerId",
+                        onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "checkpoints",
+                columns: table => new
+                {
+                    CheckpointId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
+                    Name = table.Column<string>(type: "varchar(10)", maxLength: 10, nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Date = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    IsStarted = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    CheckpointStat_GamePlayed = table.Column<int>(type: "int", nullable: false),
+                    CheckpointStat_GameWin = table.Column<int>(type: "int", nullable: false),
+                    CheckpointStat_TotalAssists = table.Column<int>(type: "int", nullable: false),
+                    CheckpointStat_TotalDeath = table.Column<int>(type: "int", nullable: false),
+                    CheckpointStat_TotalKill = table.Column<int>(type: "int", nullable: false),
+                    SessionId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_checkpoints", x => x.CheckpointId);
+                    table.ForeignKey(
+                        name: "FK_checkpoints_sessions_SessionId",
+                        column: x => x.SessionId,
+                        principalTable: "sessions",
+                        principalColumn: "SessionId",
+                        onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_checkpoints_SessionId_Date",
+                table: "checkpoints",
+                columns: new[] { "SessionId", "Date" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_corporations_CurrentName",
                 table: "corporations",
-                column: "CurrentName",
-                unique: true);
+                column: "CurrentName");
 
             migrationBuilder.CreateIndex(
                 name: "IX_corporations_CurrentTag",
@@ -249,9 +261,20 @@ namespace SC_statistic.Migrations
                 columns: new[] { "CurrentNickname", "IsInformationCorrect" });
 
             migrationBuilder.CreateIndex(
-                name: "IX_players_UserId",
-                table: "players",
-                column: "UserId");
+                name: "IX_sessions_TrackedPlayerId_StartDate",
+                table: "sessions",
+                columns: new[] { "TrackedPlayerId", "StartDate" });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_trackedplayers_PlayerId",
+                table: "trackedplayers",
+                column: "PlayerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_trackedplayers_UserId_PlayerId",
+                table: "trackedplayers",
+                columns: new[] { "UserId", "PlayerId" },
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "Login_UNIQUE",
@@ -263,6 +286,9 @@ namespace SC_statistic.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "checkpoints");
+
+            migrationBuilder.DropTable(
                 name: "notifications");
 
             migrationBuilder.DropTable(
@@ -272,13 +298,19 @@ namespace SC_statistic.Migrations
                 name: "playernicknamehistories");
 
             migrationBuilder.DropTable(
+                name: "sessions");
+
+            migrationBuilder.DropTable(
+                name: "trackedplayers");
+
+            migrationBuilder.DropTable(
                 name: "players");
 
             migrationBuilder.DropTable(
-                name: "corporations");
+                name: "users");
 
             migrationBuilder.DropTable(
-                name: "users");
+                name: "corporations");
         }
     }
 }

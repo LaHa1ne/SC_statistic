@@ -11,5 +11,7 @@ namespace SC_statistic.DataAccessLayer.Interfaces
     {
         Task<Player> GetByPlayerId(long playerId);
         Task<Player> GetByNickname(string nickname);
+        Task<List<Player>> GetPlayersByNicknameWithCorrectInfo(string nickname);
+        Task<List<Player>> GetPlayersOnSelectedPage(int page, int pageSize);
     }
 }

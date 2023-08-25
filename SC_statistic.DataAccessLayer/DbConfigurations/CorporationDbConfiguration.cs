@@ -18,7 +18,7 @@ namespace SC_statistic.DataAccessLayer.DbConfigurations
 
             entity.HasKey(e => e.CorporationId);
 
-            entity.HasIndex(e => e.CurrentName).IsUnique();
+            entity.HasIndex(e => e.CurrentName);
             entity.HasIndex(e => e.CurrentTag);
 
             entity.Property(e => e.CorporationId).IsRequired();

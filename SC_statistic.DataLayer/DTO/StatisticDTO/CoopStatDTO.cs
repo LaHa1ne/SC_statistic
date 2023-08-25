@@ -1,0 +1,15 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace SC_statistic.DataLayer.DTO.StatisticDTO
+{
+    public class CoopStatDTO
+    {
+        public int GamePlayed { get; set; }
+        public int GameWin { get; set; }
+        public string TotalBattleTime { get; set; } = null!;
+    }
+}

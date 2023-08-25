@@ -25,6 +25,11 @@ namespace SC_statistic.DataAccessLayer.Repositories
             return await _db.Users.FirstOrDefaultAsync(x => x.UserId == userId);
         }
 
+        public async Task<User> GetByUserIdWithTrackedPlayers(Guid UserId)
+        {
+            return await _db.Users.Include(x => x.TrackedPlayers).ThenInclude(x => x.Player).Include(x => x.TrackedPlayers).ThenInclude(x => x.Sessions).FirstOrDefaultAsync(x => x.UserId == UserId);
+        }
+
 
     }
 }

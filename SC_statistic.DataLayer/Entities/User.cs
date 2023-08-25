@@ -12,6 +12,6 @@ namespace SC_statistic.DataLayer.Entities
         public Guid UserId { get; set; }
         public string Login { get; set; } = null!;
         public string Password { get; set; } = null!;
-        public List<Player> TrackedPlayers { get; set; } = new List<Player>();
+        public List<TrackedPlayer> TrackedPlayers { get; set; } = new List<TrackedPlayer>();
     }
 }

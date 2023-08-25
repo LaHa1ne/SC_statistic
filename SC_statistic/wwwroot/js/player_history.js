@@ -1,7 +1,20 @@
 ﻿function Find_player_history(){
     var nickname = $('#player_nickname').val();
+
+    $('.history-container').css('visibility', 'hidden');
+    $('#nickname-list li:not(:first-child)').remove();
+    $('#corporation-list li:not(:first-child)').remove();
+    $(".player-notification").css("visibility", 'hidden');
+
     if (nickname === '') {
         $(".player-notification").text("Введите никнейм");
+        $(".player-notification").css("visibility", "visible");
+        setTimeout(function () {
+            $(".player-notification").css("visibility", "hidden");
+        }, 2000);
+    }
+    else if (nickname.length < 2 || nickname.length > 16) {
+        $(".player-notification").text("Длина никнейма от 2 до 16 символов");
         $(".player-notification").css("visibility", "visible");
         setTimeout(function () {
             $(".player-notification").css("visibility", "hidden");
@@ -13,12 +26,6 @@
             data: {nickname: nickname},
             type: "GET",
             dataType: "json",
-            beforeSend: function () {
-                $('.history-container').css('visibility', 'hidden');
-                $('#nickname-list li:not(:first-child)').remove();
-                $('#corporation-list li:not(:first-child)').remove();
-                $(".player-notification").css("visibility", 'hidden');
-            },
             success: function (response) {
                 AddPlayerHistoryFromJson(response.data);
             },

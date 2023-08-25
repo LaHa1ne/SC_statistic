@@ -11,5 +11,6 @@ namespace SC_statistic.DataAccessLayer.Interfaces
     {
         Task<User> GetByLogin(string login);
         Task<User> GetByUserId(Guid userId);
+        Task<User> GetByUserIdWithTrackedPlayers(Guid UserId);
     }
 }

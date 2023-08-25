@@ -16,13 +16,23 @@ namespace SC_statistic.DataAccessLayer.Repositories
         }
         public async Task<Player> GetByPlayerId(long playerId)
         {
-            return await _db.Players.Include(p => p.CurrentCorporation).Include(p => p.NicknameHistory).Include(p => p.CorporationHistory).ThenInclude(ch=>ch.Corporation).FirstOrDefaultAsync(p => p.PlayerId == playerId);
+            return await _db.Players.Include(p => p.CurrentCorporation).Include(p => p.NicknameHistory).Include(p => p.CorporationHistory).ThenInclude(ch => ch.Corporation).FirstOrDefaultAsync(p => p.PlayerId == playerId);
         }
 
         public async Task<Player> GetByNickname(string nickname)
         {
             var player = await _db.Players.Include(p => p.CurrentCorporation).Include(p => p.NicknameHistory).Include(p => p.CorporationHistory).FirstOrDefaultAsync(p => p.CurrentNickname == nickname && p.IsInformationCorrect);
             return player != null ? player : await _db.Players.Include(p => p.CurrentCorporation).Include(p => p.NicknameHistory).Include(p => p.CorporationHistory).FirstOrDefaultAsync(p => p.CurrentNickname == nickname && !p.IsInformationCorrect);
+        }
+
+        public async Task<List<Player>> GetPlayersByNicknameWithCorrectInfo(string nickname)
+        {
+            return await _db.Players.Where(player => player.CurrentNickname == nickname && player.IsInformationCorrect == true).ToListAsync();
+        }
+
+        public async Task<List<Player>> GetPlayersOnSelectedPage(int page, int pageSize)
+        {
+            return await _db.Players.OrderBy(p => p.PlayerId).Skip((page-1)*pageSize).Take(pageSize).ToListAsync();
         }
     }
 }

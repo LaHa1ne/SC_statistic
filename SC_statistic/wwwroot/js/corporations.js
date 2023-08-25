@@ -10,6 +10,11 @@
 function FindCorporation() {
     let selectedFilterValue = $("#name-or-tag-filter-select").val();
     var name_or_tag = $('#corporation_name_or_tag').val();
+
+    $('.corporation-info-container').css('visibility', 'hidden');
+    $('#player-table tr:not(:first-child)').remove();
+    $(".corporation-notification").css("visibility", 'hidden');
+
     if (name_or_tag === '') {
         $(".corporation-notification").text(selectedFilterValue === 'tag' ? "Введите тег" : "Введите название");
         $(".corporation-notification").css("visibility", "visible");
@@ -23,11 +28,6 @@ function FindCorporation() {
             data: selectedFilterValue === 'tag' ? { tag: name_or_tag } : { name: name_or_tag },
             type: "GET",
             dataType: "json",
-            beforeSend: function () {
-                $('.corporation-info-container').css('visibility', 'hidden');
-                $('#player-table tr:not(:first-child)').remove();
-                $(".corporation-notification").css("visibility", 'hidden');
-            },
             success: function (response) {
                 AddCorporationInfoFromJson(response.data);
             },

@@ -3,11 +3,13 @@ using Microsoft.EntityFrameworkCore;
 using SC_statistic.DataAccessLayer;
 using SC_statistic.DataAccessLayer.Interfaces;
 using SC_statistic.DataAccessLayer.Repositories;
-using SC_statistic.DataLayer.Mappers;
 using SC_statistic.DataLayer.Mappers.Corporations;
+using SC_statistic.DataLayer.Mappers.Notifications;
 using SC_statistic.DataLayer.Mappers.PlayerHistory;
+using SC_statistic.DataLayer.Mappers.PlayerStatistic;
 using SC_statistic.Services.Interfaces;
 using SC_statistic.Services.Services;
+using SC_statistic.Services.Services.BackgroundServices;
 
 namespace SC_statistic
 {
@@ -38,12 +40,17 @@ namespace SC_statistic
             builder.Services.AddTransient<INotificationRepository, NotificationRepository>();
             builder.Services.AddTransient<ICorporationRepository, CorporationRepository>();
             builder.Services.AddTransient<IPlayerRepository, PlayerRepository>();
+            builder.Services.AddTransient<ITrackedPlayerRepository, TrackedPlayerRepository>();
+            builder.Services.AddTransient<ISessionRepository, SessionRepository>();
 
             builder.Services.AddTransient<IAccountService, AccountService>();
             builder.Services.AddTransient<INotificationService, NotificationService>();
             builder.Services.AddTransient<IPlayerService, PlayerService>();
+            builder.Services.AddTransient<IPlannedPlayersUpdateService, PlannedPlayersUpdateService>();
             builder.Services.AddTransient<ICorporationService, CorporationService>();
             builder.Services.AddSingleton<ISC_ApiService, SC_ApiService>();
+
+            builder.Services.AddHostedService<PlannedPlayersUpdateBackgroundService>();
 
 
             builder.Services.AddAutoMapper(
@@ -53,7 +60,13 @@ namespace SC_statistic
                 typeof(PlayerNicknameHistoryToPlayerNicknameHistoryDTOMapperProfile),
                 typeof(PlayerCorporationHistoryToPlayerCorporationHistoryDTOMapperProfile),
                 typeof(PlayerToPlayerHistoryDTOMapperProfile),
-                typeof(CorporationToCorporationDTOMapperProfile)
+                typeof(CorporationToCorporationDTOMapperProfile),
+                typeof(FullStatToFullStatDTOMapperProfile),
+                typeof(UserToTrackedPlayerListDTOMapperProfile),
+                typeof(SessionToSessionShortInfoDTOMapperProfile),
+                typeof(FullStatToCheckpointStatMapperProfile),
+                typeof(SessionToSessionDTOMapperProfile),
+                typeof(SessionToAddCheckpointDTOMapperProfile)
                 );
 
             builder.Services.AddHttpClient();

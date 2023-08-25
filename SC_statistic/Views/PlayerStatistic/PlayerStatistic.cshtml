@@ -1,0 +1,276 @@
+﻿@model SC_statistic.DataLayer.DTO.StatisticDTO.TrackedPlayerListDTO
+<div class="main-statistic-container">
+    <div class="row player-statistic-and-sessions">
+        <div class="col-5 player-statistic-col">
+
+            <div class="d-flex justify-content-start align-items-start mt-4">
+                <div class="choose-player-container">
+                    <div class="choose-player-header">Игрок</div>
+                    <select class="player-select" onchange="Add_player_statistic('select')">
+                        <option name="empty_option" value="">Не выбран</option>
+                        @if (Model!=null)
+                        {
+                            foreach (var TrackedPlayer in Model.TrackedPlayerList)
+                            {
+                                <option name="@TrackedPlayer.TrackedPlayerId" value="@TrackedPlayer.Nickname">@TrackedPlayer.Nickname</option>
+                            }
+                        }
+                    </select>
+                </div>
+                <div class="add-player-container">
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="nickname_of_added_player" placeholder="Никнейм" aria-label="Никнейм" aria-describedby="basic-addon2">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-light add-player-button" type="button" onclick="Add_player_statistic('add')"><i class="bi bi-person-plus-fill"></i></button>
+                        </div>
+                    </div>
+                    <!-- Уведомление под полем для ввода -->
+                    <div class="notification player-notification hidden-text"></div>
+                </div>
+            </div>
+
+
+
+            <div name="" class="player-stat-container">
+                <div class="mt-3 stat-cont player-short-stat-container">
+                <div name="nickname">Никнейм пилота</div>
+                    <div name="corporation">Название Корпорации [Тег]</div>
+                    <div>Уровень допуска: <span name="accountRank">25</span></div>
+                    <div>Мощь флота: <span name="prestigeBonus">250</span></div>
+                    <div>Карма: <span name="karma">775512</span></div>
+            </div>
+
+            <div class="player-statistic-scroll">
+            <div class="row">
+                        <div class="col stat-cont pvpStat">
+                    <div class="stat-title">Статистика PvP</div>
+                            <div>Сыграно игр: <span name="gamePlayed">250</span></div>
+                            <div>Винрейт: <span name="winCoef">2.73</span></div>
+                            <div>Очков захвата: <span name="totalVpDmgDone">775512</span></div>
+                            <div>Времени в бою: <span name="totalBattleTime">2дн 6ч</span></div>
+                            <div>Рейтинг пилота: <span name="effRating">6751</span></div>
+                </div>
+                <div class="col stat-cont pvpEff">
+                    <div class="stat-title">Эффективность в PvP</div>
+                            <div>Убийств за бой: <span name="killsPerBattle">7.51</span></div>
+                            <div>Помощи за бой: <span name="assistPerBattle">10.61</span></div>
+                            <div>K/D: <span name="kd">6751</span></div>
+                            <div>A/D: <span name="ad">6751</span></div>
+                            <div>Смертей за бой: <span name="deathsPerBattle">1.43</span></div>
+                            <div>Рейтинг 1.0: <span name="ecm_rating">1.43</span></div>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col stat-cont pveStat">
+                    <div class="stat-title">Статистика PvE</div>
+                            <div>Сыграно игр: <span name="gamePlayed">250</span></div>
+                            <div>Сила: <span name="unlimPvePlayerAttackLevel">1.43</span></div>
+                            <div>Защита: <span name="unlimPvePlayerDefenceLevel">1.43</span></div>
+                </div>
+                <div class="col stat-cont coopStat">
+                    <div class="stat-title">Статистика CO-OP</div>
+                            <div>Сыграно игр: <span name="gamePlayed">250</span></div>
+                            <div>Побед: <span name="gameWin">250</span></div>
+                            <div>Времени в бою: <span name="totalBattleTime">250</span></div>
+                </div>
+            </div>
+
+                    <div class="mt-3 stat-cont unlimPveMissionLevels">
+                <div class="stat-title text-center">Уровни миссий</div>
+                <div class="row">
+                            <div class="col">Верфь «Блэквуд»: <span name="bigshipBuildingEasy">250</span></div>
+                            <div class="col">Огневая поддержка: <span name="planetWarWaves">250</span></div>
+                </div>
+                <div class="row">
+                            <div class="col">Захваченный дредноут: <span name="captureRepairbase">250</span></div>
+                            <div class="col">Контракт на оборону: <span name="nalnifanLumenWaves">250</span></div>
+                </div>
+                <div class="row">
+                            <div class="col">Добывающая станция: <span name="lootGeostationNormal">250</span></div>
+                            <div class="col">Налет на фабрику «Эллидиум»: <span name="pveFrozenStation">250</span></div>
+                </div>
+                <div class="row">
+                            <div class="col">Операция «Алая мгла»: <span name="pveJerichoBase">250</span></div>
+                            <div class="col">Операция «Ледяной пояс»: <span name="asteroidBuilding">250</span></div>
+                </div>
+                <div class="row">
+                            <div class="col">Нить Ариадны: <span name="bigshipBuilding2Easy">250</span></div>
+                            <div class="col">Операция «Монолит»: <span name="pveDesttownWavesEasy">250</span></div>
+                </div>
+                <div class="row">
+                            <div class="col">Цена доверия: <span name="pveEmpfrontierWaves">250</span></div>
+                            <div class="col">Атака на пиратский форт: <span name="piratebayHard">250</span></div>
+                </div>
+                <div class="row">
+                            <div class="col">Утечка мозгов: <span name="rescuePiratesBase">250</span></div>
+                            <div class="col">Всемером легче: <span name="magnificentSeven">250</span></div>
+                </div>
+                <div class="row">
+                            <div class="col">В поисках утраченного шаттла: <span name="stealth">250</span></div>
+                            <div class="col">Храм Последней Надежды: <span name="wavePve_maxWave">250</span></div>
+                </div>
+            </div>
+            </div>
+            </div>
+        </div>
+        <div class="col-7 sessions-col">
+
+            <div class="d-flex justify-content-center mt-4 choose-and-add-session-container">
+                <div class="choose-session-container">
+                    <div class="choose-session-header">Сессия</div>
+                    <select class="session-select" onchange="Add_session_statistic('select')">
+                        <option name="empty_option" value="">Не выбрана</option>
+                    </select>
+                </div>
+                <div class="add-session-container">
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="name_of_added_session" placeholder="Название сессии" aria-label="Название сессии" aria-describedby="basic-addon2">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-light add-session-button" type="button" onclick="Add_session_statistic('add')"><i class="bi bi-plus-lg"></i></button>
+                        </div>
+                    </div>
+                    <!-- Уведомление под полем для ввода -->
+                    <div class="notification session-notification hidden-text"></div>
+                </div>
+            </div>
+
+            <div class="session-list-and-add-checkpoint-container">
+            <div class="session-list-container mt-4">
+                <div class="left-session-list-item">
+                    <div class="session-item session-description-item">
+                        <div class="checkpoint-header">
+                            <div class="header-text">Чекпоинт</div>
+                            <div class="date">Дата</div>
+                            <div class="time">Время</div>
+                        </div>
+                            <div class="checkpoint-body">
+                            <div>Сыграно игр</div>
+                            <div>Винрейт</div>
+                            <div>Убийств за бой</div>
+                            <div>Помощи за бой</div>
+                            <div>K/D</div>
+                            <div>A/D</div>
+                            <div>Смертей за бой</div>
+                        </div>
+                    </div>
+
+                    <div class="session-item session-start-item">
+                            <div class="checkpoint-header">
+                            <div class="header-text">Начальные<br>показатели</div>
+                            <div class="date">31 сентября 1999</div>
+                            <div class="time">12:34</div>
+                        </div>
+                            <div class="checkpoint-body">
+                                <div><span name="gamePlayed">250</span></div>
+                                <div><span name="winCoef">2.75</span></div>
+                                <div><span name="killsPerBattle">6.78</span></div>
+                                <div><span name="assistPerBattle">10.24</span></div>
+                                <div><span name="kd">1.43</span></div>
+                                <div><span name="ad">5.68</span></div>
+                                <div><span name="deathsPerBattle">12.68</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="checkpoint-list-scrollable-container">
+                        <div name="empty_checkpoint" class="session-item checkpoint-item">
+                            <div class="checkpoint-header">
+                                <div class="header-text"></div>
+                                <div class="date"></div>
+                                <div class="time"></div>
+                            </div>
+                            <div class="checkpoint-body">
+                                <div><span name="gamePlayed"></span></div>
+                                <div><span name="winCoef"></span></div>
+                                <div><span name="killsPerBattle"></span></div>
+                                <div><span name="assistPerBattle"></span></div>
+                                <div><span name="kd"></span></div>
+                                <div><span name="ad"></span></div>
+                                <div><span name="deathsPerBattle"></span></div>
+                            </div>
+                        </div>
+                        <div class="session-item checkpoint-item">
+                            <div class="checkpoint-header">
+                                <div class="header-text">1111111111111111</div>
+                                <div class="date">31 сентября 1999</div>
+                                <div class="time">12:34</div>
+                            </div>
+                            <div class="checkpoint-body">
+                                <div><span name="gamePlayed">250</span></div>
+                                <div><span name="winCoef">2.75</span></div>
+                                <div><span name="killsPerBattle">6.78</span></div>
+                                <div><span name="assistPerBattle">10.24</span></div>
+                                <div><span name="kd">1.43</span></div>
+                                <div><span name="ad">5.68</span></div>
+                                <div><span name="deathsPerBattle">12.68</span></div>
+                            </div>
+                        </div>
+                        <div class="session-item checkpoint-item">
+                            <div class="checkpoint-header">
+                                <div class="header-text">11</div>
+                                <div class="date">31 сентября 1999</div>
+                                <div class="time">12:34</div>
+                            </div>
+                            <div class="checkpoint-body">
+                                <div><span name="gamePlayed">250</span></div>
+                                <div><span name="winCoef">2.75</span></div>
+                                <div><span name="killsPerBattle">6.78</span></div>
+                                <div><span name="assistPerBattle">10.24</span></div>
+                                <div><span name="kd">1.43</span></div>
+                                <div><span name="ad">5.68</span></div>
+                                <div><span name="deathsPerBattle">12.68</span></div>
+                            </div>
+                        </div>
+                        <div class="session-item checkpoint-item">
+                            <div class="checkpoint-header">
+                                <div class="header-text">11111</div>
+                                <div class="date">31 сентября 1999</div>
+                                <div class="time">12:34</div>
+                            </div>
+                            <div class="checkpoint-body">
+                                <div><span name="gamePlayed">250</span></div>
+                                <div><span name="winCoef">2.75</span></div>
+                                <div><span name="killsPerBattle">6.78</span></div>
+                                <div><span name="assistPerBattle">10.24</span></div>
+                                <div><span name="kd">1.43</span></div>
+                                <div><span name="ad">5.68</span></div>
+                                <div><span name="deathsPerBattle">12.68</span></div>
+                            </div>
+                        </div>
+                </div>
+
+                <div class="session-item average-values-item">
+                        <div class="checkpoint-header">
+                        <div class="header-text">Усредненные<br>показатели</div>
+                        <div class="date">31 сентября 1999</div>
+                        <div class="time">12:34</div>
+                    </div>
+                        <div class="checkpoint-body">
+                            <div><span name="gamePlayed">250</span></div>
+                            <div><span name="winCoef">2.75</span></div>
+                            <div><span name="killsPerBattle">6.78</span></div>
+                            <div><span name="assistPerBattle">10.24</span></div>
+                            <div><span name="kd">1.43</span></div>
+                            <div><span name="ad">5.68</span></div>
+                            <div><span name="deathsPerBattle">12.68</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-start align-items-start mt-4 add-checkpoint-external-container">
+                <div class="add-checkpoint">
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="name_of_added_checkpoint" placeholder="Название чекпоинта" aria-label="Название чекпоинта" aria-describedby="basic-addon2">
+                        <div class="input-group-append">
+                                <button class="btn btn-outline-light add-checkpoint-button" type="button" onclick="Add_checkpoint()"><i class="bi bi-plus-lg"></i></button>
+                        </div>
+                    </div>
+                    <!-- Уведомление под полем для ввода -->
+                    <div class="notification checkpoint-notification hidden-text"></div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace SC_statistic.DataAccessLayer.DbConfigurations
 {
-    internal class PlayerNicknameHistoryDbConfiguration : IEntityTypeConfiguration<PlayerNicknameHistory>
+    public class PlayerNicknameHistoryDbConfiguration : IEntityTypeConfiguration<PlayerNicknameHistory>
     {
         public void Configure(EntityTypeBuilder<PlayerNicknameHistory> entity)
         {

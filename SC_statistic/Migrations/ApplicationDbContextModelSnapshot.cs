@@ -19,6 +19,57 @@ namespace SC_statistic.Migrations
                 .HasAnnotation("ProductVersion", "6.0.19")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
+            modelBuilder.Entity("SC_statistic.DataLayer.DTO.Statistic.Session", b =>
+                {
+                    b.Property<Guid>("SessionId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(12)
+                        .HasColumnType("varchar(12)");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<Guid>("TrackedPlayerId")
+                        .HasColumnType("char(36)");
+
+                    b.HasKey("SessionId");
+
+                    b.HasIndex("TrackedPlayerId", "StartDate");
+
+                    b.ToTable("sessions", (string)null);
+                });
+
+            modelBuilder.Entity("SC_statistic.DataLayer.Entities.Checkpoint", b =>
+                {
+                    b.Property<Guid>("CheckpointId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<bool>("IsStarted")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("varchar(10)");
+
+                    b.Property<Guid>("SessionId")
+                        .HasColumnType("char(36)");
+
+                    b.HasKey("CheckpointId");
+
+                    b.HasIndex("SessionId", "Date");
+
+                    b.ToTable("checkpoints", (string)null);
+                });
+
             modelBuilder.Entity("SC_statistic.DataLayer.Entities.Corporation", b =>
                 {
                     b.Property<long>("CorporationId")
@@ -43,30 +94,11 @@ namespace SC_statistic.Migrations
 
                     b.HasKey("CorporationId");
 
-                    b.HasIndex("CurrentName")
-                        .IsUnique();
+                    b.HasIndex("CurrentName");
 
                     b.HasIndex("CurrentTag");
 
                     b.ToTable("corporations", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            CorporationId = 4505L,
-                            CurrentName = "44cd",
-                            CurrentTag = "4CB",
-                            PveRating = 50,
-                            PvpRating = 10
-                        },
-                        new
-                        {
-                            CorporationId = 5861L,
-                            CurrentName = "Lamento el Teaming",
-                            CurrentTag = "LET",
-                            PveRating = 12652,
-                            PvpRating = 19313
-                        });
                 });
 
             modelBuilder.Entity("SC_statistic.DataLayer.Entities.Notification", b =>
@@ -90,120 +122,6 @@ namespace SC_statistic.Migrations
                     b.HasIndex(new[] { "Date" }, "Date_index");
 
                     b.ToTable("notifications", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            NotificationId = 1L,
-                            Date = new DateTime(2023, 7, 17, 18, 50, 1, 737, DateTimeKind.Local).AddTicks(4646),
-                            Text = "Системное1",
-                            Type = 3
-                        },
-                        new
-                        {
-                            NotificationId = 2L,
-                            Date = new DateTime(2023, 7, 17, 18, 50, 2, 737, DateTimeKind.Local).AddTicks(4659),
-                            Text = "Игрок1",
-                            Type = 0
-                        },
-                        new
-                        {
-                            NotificationId = 3L,
-                            Date = new DateTime(2023, 7, 17, 18, 50, 3, 737, DateTimeKind.Local).AddTicks(4660),
-                            Text = "Смена корп1",
-                            Type = 2
-                        },
-                        new
-                        {
-                            NotificationId = 4L,
-                            Date = new DateTime(2023, 7, 17, 18, 50, 4, 737, DateTimeKind.Local).AddTicks(4661),
-                            Text = "Смена назв1",
-                            Type = 1
-                        },
-                        new
-                        {
-                            NotificationId = 5L,
-                            Date = new DateTime(2023, 7, 17, 18, 50, 5, 737, DateTimeKind.Local).AddTicks(4662),
-                            Text = "Системное2",
-                            Type = 3
-                        },
-                        new
-                        {
-                            NotificationId = 6L,
-                            Date = new DateTime(2023, 7, 17, 18, 50, 6, 737, DateTimeKind.Local).AddTicks(4665),
-                            Text = "Игрок2",
-                            Type = 0
-                        },
-                        new
-                        {
-                            NotificationId = 7L,
-                            Date = new DateTime(2023, 7, 17, 18, 50, 7, 737, DateTimeKind.Local).AddTicks(4666),
-                            Text = "Смена корп2",
-                            Type = 2
-                        },
-                        new
-                        {
-                            NotificationId = 8L,
-                            Date = new DateTime(2023, 7, 17, 18, 50, 8, 737, DateTimeKind.Local).AddTicks(4667),
-                            Text = "Смена назв2",
-                            Type = 1
-                        },
-                        new
-                        {
-                            NotificationId = 9L,
-                            Date = new DateTime(2023, 7, 17, 18, 50, 9, 737, DateTimeKind.Local).AddTicks(4668),
-                            Text = "Системное3",
-                            Type = 3
-                        },
-                        new
-                        {
-                            NotificationId = 10L,
-                            Date = new DateTime(2023, 7, 17, 18, 50, 10, 737, DateTimeKind.Local).AddTicks(4669),
-                            Text = "Игрок3",
-                            Type = 0
-                        },
-                        new
-                        {
-                            NotificationId = 11L,
-                            Date = new DateTime(2023, 7, 17, 18, 50, 11, 737, DateTimeKind.Local).AddTicks(4670),
-                            Text = "Смена корп3",
-                            Type = 2
-                        },
-                        new
-                        {
-                            NotificationId = 12L,
-                            Date = new DateTime(2023, 7, 17, 18, 50, 12, 737, DateTimeKind.Local).AddTicks(4671),
-                            Text = "Смена назв3",
-                            Type = 1
-                        },
-                        new
-                        {
-                            NotificationId = 13L,
-                            Date = new DateTime(2023, 7, 17, 18, 50, 13, 737, DateTimeKind.Local).AddTicks(4672),
-                            Text = "Системное4",
-                            Type = 3
-                        },
-                        new
-                        {
-                            NotificationId = 14L,
-                            Date = new DateTime(2023, 7, 17, 18, 50, 14, 737, DateTimeKind.Local).AddTicks(4673),
-                            Text = "Игрок4",
-                            Type = 0
-                        },
-                        new
-                        {
-                            NotificationId = 15L,
-                            Date = new DateTime(2023, 7, 17, 18, 50, 15, 737, DateTimeKind.Local).AddTicks(4674),
-                            Text = "Смена корп4",
-                            Type = 2
-                        },
-                        new
-                        {
-                            NotificationId = 16L,
-                            Date = new DateTime(2023, 7, 17, 18, 50, 16, 737, DateTimeKind.Local).AddTicks(4675),
-                            Text = "Смена назв4",
-                            Type = 1
-                        });
                 });
 
             modelBuilder.Entity("SC_statistic.DataLayer.Entities.Player", b =>
@@ -223,34 +141,13 @@ namespace SC_statistic.Migrations
                     b.Property<bool>("IsInformationCorrect")
                         .HasColumnType("tinyint(1)");
 
-                    b.Property<Guid?>("UserId")
-                        .HasColumnType("char(36)");
-
                     b.HasKey("PlayerId");
 
                     b.HasIndex("CurrentCorporationId");
 
-                    b.HasIndex("UserId");
-
                     b.HasIndex("CurrentNickname", "IsInformationCorrect");
 
                     b.ToTable("players", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            PlayerId = 585650L,
-                            CurrentCorporationId = 4505L,
-                            CurrentNickname = "fantazm",
-                            IsInformationCorrect = true
-                        },
-                        new
-                        {
-                            PlayerId = 2177186L,
-                            CurrentCorporationId = 4505L,
-                            CurrentNickname = "AggressiveStyle",
-                            IsInformationCorrect = true
-                        });
                 });
 
             modelBuilder.Entity("SC_statistic.DataLayer.Entities.PlayerCorporationHistory", b =>
@@ -276,28 +173,6 @@ namespace SC_statistic.Migrations
                         .IsUnique();
 
                     b.ToTable("playercorporationhistories", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            PlayerCorporationHistoryId = 1L,
-                            Date = new DateTime(2014, 5, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PlayerId = 585650L
-                        },
-                        new
-                        {
-                            PlayerCorporationHistoryId = 2L,
-                            CorporationId = 4505L,
-                            Date = new DateTime(2020, 3, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PlayerId = 585650L
-                        },
-                        new
-                        {
-                            PlayerCorporationHistoryId = 3L,
-                            CorporationId = 4505L,
-                            Date = new DateTime(2022, 7, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PlayerId = 2177186L
-                        });
                 });
 
             modelBuilder.Entity("SC_statistic.DataLayer.Entities.PlayerNicknameHistory", b =>
@@ -323,29 +198,28 @@ namespace SC_statistic.Migrations
                         .IsUnique();
 
                     b.ToTable("playernicknamehistories", (string)null);
+                });
 
-                    b.HasData(
-                        new
-                        {
-                            PlayerNicknameHistoryId = 1L,
-                            Date = new DateTime(2015, 7, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Nickname = "Ala",
-                            PlayerId = 585650L
-                        },
-                        new
-                        {
-                            PlayerNicknameHistoryId = 2L,
-                            Date = new DateTime(2019, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Nickname = "fantazm",
-                            PlayerId = 585650L
-                        },
-                        new
-                        {
-                            PlayerNicknameHistoryId = 3L,
-                            Date = new DateTime(2021, 7, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Nickname = "AggressiveStyle",
-                            PlayerId = 2177186L
-                        });
+            modelBuilder.Entity("SC_statistic.DataLayer.Entities.TrackedPlayer", b =>
+                {
+                    b.Property<Guid>("TrackedPlayerId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)");
+
+                    b.Property<long>("PlayerId")
+                        .HasColumnType("bigint");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("char(36)");
+
+                    b.HasKey("TrackedPlayerId");
+
+                    b.HasIndex("PlayerId");
+
+                    b.HasIndex("UserId", "PlayerId")
+                        .IsUnique();
+
+                    b.ToTable("trackedplayers", (string)null);
                 });
 
             modelBuilder.Entity("SC_statistic.DataLayer.Entities.User", b =>
@@ -372,15 +246,64 @@ namespace SC_statistic.Migrations
                     b.ToTable("users", (string)null);
                 });
 
+            modelBuilder.Entity("SC_statistic.DataLayer.DTO.Statistic.Session", b =>
+                {
+                    b.HasOne("SC_statistic.DataLayer.Entities.TrackedPlayer", "TrackedPlayer")
+                        .WithMany("Sessions")
+                        .HasForeignKey("TrackedPlayerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("TrackedPlayer");
+                });
+
+            modelBuilder.Entity("SC_statistic.DataLayer.Entities.Checkpoint", b =>
+                {
+                    b.HasOne("SC_statistic.DataLayer.DTO.Statistic.Session", "Session")
+                        .WithMany("Checkpoints")
+                        .HasForeignKey("SessionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.OwnsOne("SC_statistic.DataLayer.Entities.CheckpointStat", "CheckpointStat", b1 =>
+                        {
+                            b1.Property<Guid>("CheckpointId")
+                                .HasColumnType("char(36)");
+
+                            b1.Property<int>("GamePlayed")
+                                .HasColumnType("int");
+
+                            b1.Property<int>("GameWin")
+                                .HasColumnType("int");
+
+                            b1.Property<int>("TotalAssists")
+                                .HasColumnType("int");
+
+                            b1.Property<int>("TotalDeath")
+                                .HasColumnType("int");
+
+                            b1.Property<int>("TotalKill")
+                                .HasColumnType("int");
+
+                            b1.HasKey("CheckpointId");
+
+                            b1.ToTable("checkpoints");
+
+                            b1.WithOwner()
+                                .HasForeignKey("CheckpointId");
+                        });
+
+                    b.Navigation("CheckpointStat")
+                        .IsRequired();
+
+                    b.Navigation("Session");
+                });
+
             modelBuilder.Entity("SC_statistic.DataLayer.Entities.Player", b =>
                 {
                     b.HasOne("SC_statistic.DataLayer.Entities.Corporation", "CurrentCorporation")
                         .WithMany("Players")
                         .HasForeignKey("CurrentCorporationId");
-
-                    b.HasOne("SC_statistic.DataLayer.Entities.User", null)
-                        .WithMany("TrackedPlayers")
-                        .HasForeignKey("UserId");
 
                     b.Navigation("CurrentCorporation");
                 });
@@ -413,6 +336,30 @@ namespace SC_statistic.Migrations
                     b.Navigation("Player");
                 });
 
+            modelBuilder.Entity("SC_statistic.DataLayer.Entities.TrackedPlayer", b =>
+                {
+                    b.HasOne("SC_statistic.DataLayer.Entities.Player", "Player")
+                        .WithMany("TrackedPlayers")
+                        .HasForeignKey("PlayerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("SC_statistic.DataLayer.Entities.User", "User")
+                        .WithMany("TrackedPlayers")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Player");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("SC_statistic.DataLayer.DTO.Statistic.Session", b =>
+                {
+                    b.Navigation("Checkpoints");
+                });
+
             modelBuilder.Entity("SC_statistic.DataLayer.Entities.Corporation", b =>
                 {
                     b.Navigation("CorporationHistories");
@@ -425,6 +372,13 @@ namespace SC_statistic.Migrations
                     b.Navigation("CorporationHistory");
 
                     b.Navigation("NicknameHistory");
+
+                    b.Navigation("TrackedPlayers");
+                });
+
+            modelBuilder.Entity("SC_statistic.DataLayer.Entities.TrackedPlayer", b =>
+                {
+                    b.Navigation("Sessions");
                 });
 
             modelBuilder.Entity("SC_statistic.DataLayer.Entities.User", b =>

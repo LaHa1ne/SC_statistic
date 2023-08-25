@@ -1,0 +1,311 @@
+﻿.main-statistic-container {
+    padding-left: 20px;
+    padding-right: 20px;
+    height: 100%;
+}
+    .main-statistic-container .player-statistic-col, .main-statistic-container .player-statistic-and-sessions, .main-statistic-container .sessions-col {
+        height: 100%;
+    }
+
+.main-statistic-container .stat-title {
+    color: white;
+    text-align: left;
+    padding: 0;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom: 1px solid white;
+}
+
+    .main-statistic-container .stat-cont {
+        color: #ffffff90;
+        padding: 0 10px 10px 10px;
+        border-radius: 5px;
+    }
+
+    .main-statistic-container .d-flex.align-items-start {
+        align-items: flex-start; 
+    }
+
+@media (max-width: 1350px) {
+    .main-statistic-container .d-flex.justify-content-start, .main-statistic-container .d-flex.justify-content-center {
+        flex-direction: column; 
+    }
+
+    .main-statistic-container .add-player-container, .main-statistic-container .add-session-container, .main-statistic-container .add-checkpoint-external-container {
+        margin-top: 10px; 
+    }
+}
+
+.main-statistic-container .add-player-container .input-group, .main-statistic-container .add-session-container .input-group, .main-statistic-container .add-checkpoint-container .input-group {
+    height: 38px;
+}
+
+.main-statistic-container .add-player-button, .main-statistic-container .add-session-button, .main-statistic-container .add-checkpoint-button {
+    background-color: #343a40;
+    color: white;
+}
+
+.main-statistic-container .choose-player-container, .main-statistic-container .choose-session-container {
+    display: flex;
+    padding-right: 10px;
+    height: 38px;
+}
+
+@media (max-width: 768px) {
+    .main-statistic-container .add-player-container .input-group {
+        height: 32.5px;
+    }
+
+    .main-statistic-container .choose-player-container {
+        height: 32.5px;
+    }
+
+    .main-statistic-container .add-session-container .input-group {
+        height: 32.5px;
+    }
+
+    .main-statistic-container .choose-session-container {
+        height: 32.5px;
+    }
+
+    .main-statistic-container .add-checkpoint-container .input-group {
+        height: 32.5px;
+    }
+}
+
+.main-statistic-container .choose-player-header, .main-statistic-container .choose-session-header {
+    padding: 5px;
+    background-color: #343a40;
+    color: white;
+    border-radius: 2px;
+    border: 1px solid white;
+}
+
+.main-statistic-container .player-select, .main-statistic-container .session-select {
+    padding: 5px;
+    background-color: #343a40;
+    color: white;
+    border-radius: 2px;
+    border: 1px solid white;
+}
+
+.main-statistic-container .add-player-container, .main-statistic-container .add-session-container {
+}
+
+.main-statistic-container #nickname_of_added_player, .main-statistic-container #name_of_added_session, .main-statistic-container #name_of_added_checkpoint {
+    background-color: #495057;
+    color: #ffffff;
+}
+
+    .main-statistic-container .player-notification {
+        margin-top: 10px;
+        padding: 5px 10px;
+        color: #ffffff;
+        background: none;
+    }
+
+.main-statistic-container .player-stat-container {
+    visibility: hidden;
+    height: calc(100% - 106px);
+    
+}
+
+@media (max-width: 1350px) {
+    .main-statistic-container .player-stat-container {
+        height: calc(100% - 154px);
+    }
+}
+
+
+.main-statistic-container .player-statistic-scroll {
+    height: calc(100% - 130px);
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+@media (max-width: 1350px) {
+    .main-statistic-container .player-statistic-scroll {
+        height: calc(100% - 150px);
+    }
+}
+
+.player-statistic-scroll::-webkit-scrollbar {
+    width: 10px; 
+}
+
+.player-statistic-scroll::-webkit-scrollbar-thumb {
+    background-color: #495057;
+    border-radius: 5px; 
+}
+
+.player-statistic-scroll::-webkit-scrollbar-track {
+    background-color: #333;
+    border-radius: 5px;
+}
+
+
+
+.main-statistic-container .add-checkpoint-external-container {
+    padding-left: 30px;
+}
+
+.main-statistic-container .choose-and-add-session-container {
+    padding-left: 30px;
+    visibility: hidden;
+}
+
+
+.main-statistic-container .session-list-container {
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding-left: 30px;
+}
+
+.main-statistic-container .add-session-container, .main-statistic-container .add-checkpoint-container {
+    max-width: 248px;
+}
+
+@media (max-width: 768px) {
+    .main-statistic-container .add-session-container {
+        max-width: 218px;
+    }
+
+    .main-statistic-container .add-checkpoint-container {
+        max-width: 218px;
+    }
+}
+
+.main-statistic-container .notification {
+    margin-top: 10px;
+    padding: 5px 10px;
+    color: #ffffff;
+    background: none;
+    visibility: hidden;
+}
+
+
+.main-statistic-container .left-session-list-item {
+    left: 0;
+    margin-right: auto;
+    display: flex;
+    border-top: 1px solid lightgray;
+    border-bottom: 1px solid lightgray;
+}
+
+.main-statistic-container .left-session-list-item .session-description-item{
+    width: 135px;
+}
+
+.main-statistic-container .left-session-list-item .session-start-item {
+    width: 110px;
+}
+
+.main-statistic-container .average-values-item {
+    width: 110px;
+}
+
+@media (max-width: 768px) {
+    .main-statistic-container .left-session-list-item .session-description-item {
+        width: 115px;
+    }
+
+    .main-statistic-container .left-session-list-item .session-start-item {
+        width: 110px;
+    }
+
+    .main-statistic-container .average-values-item {
+        width: 110px;
+    }
+}
+
+.main-statistic-container .average-values-item {
+    right: 0;
+    margin-left: auto;
+    border-top: 1px solid lightgray;
+    border-bottom: 1px solid lightgray;
+}
+
+.main-statistic-container .checkpoint-item {
+    min-width: 110px;
+    max-width: 150px;
+    border-top: 1px solid lightgray;
+    border-bottom: 1px solid lightgray;
+}
+
+    .main-statistic-container .checkpoint-item[name="empty_checkpoint"]{
+        display: none;
+    }
+
+    @media (max-width: 768px) {
+        .main-statistic-container .checkpoint-item {
+        min-width: 101.6px;
+        max-width: 138.5px;
+    }
+}
+
+.main-statistic-container .checkpoint-list-scrollable-container {
+    display: flex;
+    flex-grow: 1;
+    overflow-x: auto;
+}
+
+    .main-statistic-container .checkpoint-list-scrollable-container::-webkit-scrollbar {
+        height: 8px;
+    }
+
+    .main-statistic-container .checkpoint-list-scrollable-container::-webkit-scrollbar-track {
+        background-color: #333;
+        border-radius: 5px;
+    }
+
+    .main-statistic-container .checkpoint-list-scrollable-container::-webkit-scrollbar-thumb {
+        background-color: #adb5bd;
+        border-radius: 5px;
+    }
+
+.main-statistic-container .session-item {
+    border-left: 1px solid lightgray;
+    border-right: 1px solid lightgray;
+}
+
+    .main-statistic-container .session-item .date, .main-statistic-container .session-item .time {
+        font-size: 12px;
+        color: #999;
+    }
+
+.main-statistic-container .checkpoint-header {
+    padding: 5px;
+    background-color: #343a40;
+}
+
+    .main-statistic-container .checkpoint-header .header-text {
+        color: white;
+        height: 48px;
+    }
+
+@media (max-width: 768px) {
+    .main-statistic-container .checkpoint-header .header-text {
+        max-width: 42px;
+    }
+}
+
+.main-statistic-container .checkpoint-body {
+    padding: 5px;
+    color: #999;
+    background-color: #495057;
+}
+
+.main-statistic-container .session-list-and-add-checkpoint-container
+{
+    width: 100%;
+    visibility: hidden;
+}
+
+
+
+
+

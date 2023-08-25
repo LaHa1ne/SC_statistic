@@ -1,21 +1,20 @@
 ﻿.list-container {
-    width: 50%; /* Ширина списка - 1/3 от ширины страницы */
-    margin: 0 auto; /* Расположение по центру страницы */
-    /* Включение вертикальной прокрутки */
-    display: flex; /* Использование flex-контейнера */
-    flex-direction: column; /* Вертикальное расположение элементов */
-    align-items: center; /* Выравнивание по центру по горизонтали */
+    width: 50%; 
+    margin: 0 auto; 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
     padding-top: 20px;
     max-height: calc(100% - 40px);
 }
 
 .notification-list::-webkit-scrollbar {
-    width: 8px; /* Ширина полосы прокрутки */
+    width: 8px; 
 }
 
 .notification-list::-webkit-scrollbar-thumb {
-    background-color: #888; /* Цвет полосы прокрутки */
-    border-radius: 10px; /* Радиус закругления полосы прокрутки */
+    background-color: #888; 
+    border-radius: 10px; 
 }
 
 .notification-list {
@@ -58,25 +57,25 @@
     }
 
 .blue:before {
-    background-color: lightblue; /* Синяя полоска слева */
+    background-color: lightblue; 
 }
 
 .red:before {
-    background-color: red; /* Красная полоска слева */
+    background-color: red; 
 }
 
 .green:before {
-    background-color: green; /* Зеленая полоска слева */
+    background-color: green; 
 }
 
 .yellow:before {
-    background-color: yellow; /* Желтая полоска слева */
+    background-color: yellow;
 }
 
 .list-text {
-    color: white; /* Белый цвет текста */
-    font-size: 16px; /* Увеличенный размер шрифта */
-    font-style: normal; /* Обычное начертание текста */
+    color: white; 
+    font-size: 16px;
+    font-style: normal;
 }
 
 .date {
@@ -87,50 +86,48 @@
 .list-container .filter-container {
     display: flex;
     align-items: center;
-    justify-content: flex-start; /* Выравнивание по левому краю */
-    margin-bottom: 10px; /* Отступ снизу для разделения элементов списка */
+    justify-content: flex-start; 
+    margin-bottom: 10px; 
 }
 
 .list-container .filter-label {
-    color: white; /* Белый цвет текста */
+    color: white; 
     margin-right: 10px;
 }
 
 .list-container .filter-select {
     padding: 5px;
-    /*background-color: #343a40; /* Цвет фона раскрывающегося списка */
     background-color: #495057;
-    color: white; /* Белый цвет текста в списке */
-    border: none; /* Удаление границы списка */
-    border-radius: 5px; /* Закругленные углы списка */
-    margin-right: 10px; /* Отступ справа для разделения списка и кнопки */
+    color: white; 
+    border: none; 
+    border-radius: 5px; 
+    margin-right: 10px; 
 }
 
 .load-more-btn-container {
     display: flex;
     align-items: center;
-    margin-bottom: 10px; /* Отступ снизу для разделения элементов списка */
-    justify-content: flex-start; /* Выравнивание по левому краю */
+    margin-bottom: 10px; 
+    justify-content: flex-start; 
 }
 
 .load-more-btn {
-    /*background-color: #7f7f7f; /* Более светло-серый фон кнопки */
     background-color: #495057;
-    color: white; /* Белый цвет текста на кнопке */
-    font-size: 14px; /* Увеличенный размер шрифта */
-    font-weight: normal; /* Обычное начертание текста */
-    border: none; /* Удаление границы кнопки */
-    border-radius: 5px; /* Закругленные углы кнопки */
-    padding: 8px 10px; /* Отступы внутри кнопки */
-    width: fit-content; /* Ширина кнопки, основанная на ее содержимом */
+    color: white; 
+    font-size: 14px; 
+    font-weight: normal; 
+    border: none; 
+    border-radius: 5px; 
+    padding: 8px 10px;
+    width: fit-content; 
     display: inline-block;
-    margin-right: auto; /* Автоматический отступ справа для выравнивания по левому краю */
+    margin-right: auto; 
 }
 
 
 
     .load-more-btn:hover {
-        opacity: 0.8; /* Уменьшение прозрачности при наведении на кнопку */
-        cursor: pointer; /* Изменение курсора при наведении на кнопку */
+        opacity: 0.8; 
+        cursor: pointer; 
     }
 

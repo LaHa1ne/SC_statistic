@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
 using SC_statistic.DataAccessLayer.DbConfigurations;
+using SC_statistic.DataLayer.DTO.Statistic;
 using SC_statistic.DataLayer.Entities;
 using SC_statistic.DataLayer.Enums;
 using System;
@@ -39,6 +40,11 @@ namespace SC_statistic.DataAccessLayer
         public virtual DbSet<PlayerNicknameHistory> NicknameHistories { get; set; } = null!;
         public virtual DbSet<PlayerCorporationHistory> CorporationHistories { get; set; } = null!;
 
+        public virtual DbSet<TrackedPlayer> TrackedPlayers { get; set; } = null!;
+        public virtual DbSet<Session> Sessions { get; set; } = null!;
+        public virtual DbSet<Checkpoint> Checkpoints { get; set; } = null!;
+
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new UserDbConfiguration());
@@ -47,6 +53,9 @@ namespace SC_statistic.DataAccessLayer
             modelBuilder.ApplyConfiguration(new PlayerDbConfiguration());
             modelBuilder.ApplyConfiguration(new PlayerNicknameHistoryDbConfiguration());
             modelBuilder.ApplyConfiguration(new PlayerCorporationHistoryDbConfiguration());
+            modelBuilder.ApplyConfiguration(new TrackedPlayerDbConfiguration());
+            modelBuilder.ApplyConfiguration(new SessionDbConfiguration());
+            modelBuilder.ApplyConfiguration(new CheckpointDbConfiguration());
 
         }
     }
