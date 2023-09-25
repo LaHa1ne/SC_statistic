@@ -22,5 +22,5 @@ RUN dotnet publish "SC_statistic.csproj" -c Release -o /app/publish /p:UseAppHos
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "SC_statistic.dll", "migrate"]
+ENTRYPOINT ["dotnet", "SC_statistic.dll"]
 CMD ["--urls", "http://0.0.0.0:80"]

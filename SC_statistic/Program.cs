@@ -103,16 +103,16 @@ namespace SC_statistic
         {
             var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Production";
 
-            /*return new ConfigurationBuilder()
+            return new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile($"appsettings.{environment}.json", optional: false, reloadOnChange: true)
                 .AddEnvironmentVariables()
-                .Build();*/
-            return new ConfigurationBuilder()
+                .Build();
+            /*return new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile($"appsettings.docker.json", optional: false, reloadOnChange: true)
                 .AddEnvironmentVariables()
-                .Build();
+                .Build();*/
         }
     }
 }
