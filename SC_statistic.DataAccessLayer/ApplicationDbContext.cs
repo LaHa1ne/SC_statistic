@@ -17,6 +17,7 @@ namespace SC_statistic.DataAccessLayer
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
+            Database.EnsureCreated();
         }
 
         public class BloggingContextFactory : IDesignTimeDbContextFactory<ApplicationDbContext>

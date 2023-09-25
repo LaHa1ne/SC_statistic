@@ -1,21 +1,27 @@
 ﻿version: '3.9'
 
+networks:
+  deploy-guide-dev:
+
 services:
   app:
     #image: mcr.microsoft.com/dotnet/aspnet:6.0 
     container_name: SC_stat_app
     build:
-      context: .
-      dockerfile: ./Dockerfile
+      context: ../
+      dockerfile: ./SC_Statistic/Dockerfile
     ports:
       - "80:80"  
     networks:
       - deploy-guide-dev
     depends_on:
       - db
+    environment:
+      - ASPNETCORE_ENVIRONMENT=docker
+    command: ["migrate"]
 
     #environment:
-     # - PROJECT_PATH=/app/SC_statistic  # Относительный путь к проекту
+    # - PROJECT_PATH=/app/SC_statistic  # Относительный путь к проекту
     #volumes:
     #  - ./AspNetCoreApp:/app/SC_statistic  # Используйте относительный путь к вашему проекту ASP.NET Core
 
@@ -25,8 +31,13 @@ services:
     restart: always
     ports: 
       - 3307:3306
+    networks:
+      - deploy-guide-dev
     environment:
-      MYSQL_ROOT_PASSWORD: Rb,thhnhjkm2000  
+      MYSQL_ROOT_PASSWORD: Rb,thhNhjkm2000  
       MYSQL_DATABASE: st_statistic_db  
     volumes:
-      - mysql-data:/var/lib/mysql/data
+      - mysql-data:/var/lib/my-sql/data
+
+volumes:
+  mysql-data:

@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using SC_statistic.DataAccessLayer;
 using SC_statistic.DataAccessLayer.Interfaces;
 using SC_statistic.DataAccessLayer.Repositories;
@@ -10,6 +11,7 @@ using SC_statistic.DataLayer.Mappers.PlayerStatistic;
 using SC_statistic.Services.Interfaces;
 using SC_statistic.Services.Services;
 using SC_statistic.Services.Services.BackgroundServices;
+using System.Linq.Expressions;
 
 namespace SC_statistic
 {
@@ -17,6 +19,7 @@ namespace SC_statistic
     {
         public static void Main(string[] args)
         {
+            var configuration = GetConfiguration(args);
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
@@ -27,7 +30,10 @@ namespace SC_statistic
             string connection = builder.Configuration.GetConnectionString("MySqlConnection");
             string version = builder.Configuration.GetConnectionString("MySqlVersion");
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
-            options.UseMySql(connection, ServerVersion.Parse(version)));
+            options.UseMySql(connection, ServerVersion.Parse(version), mysqlOptions =>
+            {
+                mysqlOptions.EnableRetryOnFailure(maxRetryCount: 5, maxRetryDelay: TimeSpan.FromSeconds(30), errorNumbersToAdd: null);
+            }));
 
             builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(options =>
@@ -79,6 +85,27 @@ namespace SC_statistic
                 app.UseHsts();
             }
 
+            ////
+            if (args.Contains("migrate"))
+            {
+                using (var scope = app.Services.CreateScope())
+                {
+                    var services = scope.ServiceProvider;
+                    try
+                    {
+                        var dbContext = services.GetRequiredService<ApplicationDbContext>();
+                        dbContext.Database.Migrate();
+                    }
+                    catch (Exception ex)
+                    {
+                        var logger = services.GetRequiredService<ILogger<Program>>();
+                        logger.LogError(ex, "An error occurred while migrating the database.");
+                    }
+                }
+            }
+            ///
+            
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
@@ -92,6 +119,22 @@ namespace SC_statistic
                 pattern: "{controller=Home}/{action=Index}/{id?}");
 
             app.Run();
+        }
+
+        private static IConfiguration GetConfiguration(string[] args)
+        {
+            var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Production";
+
+            /*return new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile($"appsettings.{environment}.json", optional: false, reloadOnChange: true)
+                .AddEnvironmentVariables()
+                .Build();*/
+            return new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile($"appsettings.docker.json", optional: false, reloadOnChange: true)
+                .AddEnvironmentVariables()
+                .Build();
         }
     }
 }

@@ -196,9 +196,9 @@ namespace SC_statistic.Migrations
                     IsStarted = table.Column<bool>(type: "tinyint(1)", nullable: false),
                     CheckpointStat_GamePlayed = table.Column<int>(type: "int", nullable: false),
                     CheckpointStat_GameWin = table.Column<int>(type: "int", nullable: false),
+                    CheckpointStat_TotalKill = table.Column<int>(type: "int", nullable: false),
                     CheckpointStat_TotalAssists = table.Column<int>(type: "int", nullable: false),
                     CheckpointStat_TotalDeath = table.Column<int>(type: "int", nullable: false),
-                    CheckpointStat_TotalKill = table.Column<int>(type: "int", nullable: false),
                     SessionId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci")
                 },
                 constraints: table =>

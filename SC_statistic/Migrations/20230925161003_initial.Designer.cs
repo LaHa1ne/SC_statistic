@@ -11,7 +11,7 @@ using SC_statistic.DataAccessLayer;
 namespace SC_statistic.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230821171709_initial")]
+    [Migration("20230925161003_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
