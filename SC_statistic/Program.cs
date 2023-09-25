@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using SC_statistic.DataAccessLayer;
 using SC_statistic.DataAccessLayer.Interfaces;
 using SC_statistic.DataAccessLayer.Repositories;
@@ -10,6 +11,7 @@ using SC_statistic.DataLayer.Mappers.PlayerStatistic;
 using SC_statistic.Services.Interfaces;
 using SC_statistic.Services.Services;
 using SC_statistic.Services.Services.BackgroundServices;
+using System.Linq.Expressions;
 
 namespace SC_statistic
 {
@@ -17,6 +19,7 @@ namespace SC_statistic
     {
         public static void Main(string[] args)
         {
+            var configuration = GetConfiguration(args);
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
@@ -24,10 +27,11 @@ namespace SC_statistic
                 .AddNewtonsoftJson();
             builder.Services.AddAntiforgery(options => { options.SuppressXFrameOptionsHeader = true; });
 
-            string connection = builder.Configuration.GetConnectionString("MySqlConnection");
-            string version = builder.Configuration.GetConnectionString("MySqlVersion");
+
+            AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+            string connection = builder.Configuration.GetConnectionString("PostgresSQL");
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
-            options.UseMySql(connection, ServerVersion.Parse(version)));
+            options.UseNpgsql(connection));
 
             builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(options =>
@@ -78,6 +82,7 @@ namespace SC_statistic
                 app.UseExceptionHandler("/Home/Error");
                 app.UseHsts();
             }
+            
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
@@ -92,6 +97,22 @@ namespace SC_statistic
                 pattern: "{controller=Home}/{action=Index}/{id?}");
 
             app.Run();
+        }
+
+        private static IConfiguration GetConfiguration(string[] args)
+        {
+            var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Production";
+
+            return new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile($"appsettings.{environment}.json", optional: false, reloadOnChange: true)
+                .AddEnvironmentVariables()
+                .Build();
+            /*return new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile($"appsettings.docker.json", optional: false, reloadOnChange: true)
+                .AddEnvironmentVariables()
+                .Build();*/
         }
     }
 }

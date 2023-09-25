@@ -17,6 +17,7 @@ namespace SC_statistic.DataAccessLayer
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
+            Database.EnsureCreated();
         }
 
         public class BloggingContextFactory : IDesignTimeDbContextFactory<ApplicationDbContext>
@@ -27,7 +28,7 @@ namespace SC_statistic.DataAccessLayer
                     .SetBasePath(Path.Combine(Directory.GetCurrentDirectory(), "../SC_statistic"))
                     .AddJsonFile("appsettings.json", optional: true).Build();
                 var optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
-                optionsBuilder.UseMySql(config.GetConnectionString("MySqlConnection"), ServerVersion.Parse(config.GetConnectionString("MySqlVersion")), b => b.MigrationsAssembly("SC_statistic"));
+                optionsBuilder.UseNpgsql(config.GetConnectionString("PostgresSQL"), b => b.MigrationsAssembly("SC_statistic"));
 
                 return new ApplicationDbContext(optionsBuilder.Options);
             }

@@ -1,5 +1,4 @@
-﻿function openRegistrationModalForm()
-{
+﻿function openRegistrationModalForm() {
     const registrationModalForm = $('#AccountModal');
     $.ajax({
         url: '/Account/Registration',

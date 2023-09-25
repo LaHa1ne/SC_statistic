@@ -27,7 +27,7 @@ namespace SC_statistic.Services.Services.BackgroundServices
                     using (var scope = _services.CreateScope())
                     {
                         var plannedPlayersUpdateService = scope.ServiceProvider.GetRequiredService<IPlannedPlayersUpdateService>();
-                        //await plannedPlayersUpdateService.UpdateAllPlayers();
+                        await plannedPlayersUpdateService.UpdateAllPlayers();
                     }
 
                     await Task.Delay(TimeSpan.FromHours(8), stoppingToken);

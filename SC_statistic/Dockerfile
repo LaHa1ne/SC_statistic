@@ -7,10 +7,10 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["SC_statistic/SC_statistic.csproj", "SC_statistic/"]
-COPY ["SC_statistic.DataLayer/SC_statistic.DataLayer.csproj", "SC_statistic.DataLayer/"]
-COPY ["SC_statistic.Services/SC_statistic.Services.csproj", "SC_statistic.Services/"]
-COPY ["SC_statistic.DataAccessLayer/SC_statistic.DataAccessLayer.csproj", "SC_statistic.DataAccessLayer/"]
+COPY ["./SC_statistic/SC_statistic.csproj", "SC_statistic/"]
+COPY ["./SC_statistic.DataLayer/SC_statistic.DataLayer.csproj", "SC_statistic.DataLayer/"]
+COPY ["./SC_statistic.Services/SC_statistic.Services.csproj", "SC_statistic.Services/"]
+COPY ["./SC_statistic.DataAccessLayer/SC_statistic.DataAccessLayer.csproj", "SC_statistic.DataAccessLayer/"]
 RUN dotnet restore "SC_statistic/SC_statistic.csproj"
 COPY . .
 WORKDIR "/src/SC_statistic"
@@ -23,3 +23,4 @@ FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "SC_statistic.dll"]
+CMD ["--urls", "http://0.0.0.0:80"]
