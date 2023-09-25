@@ -6,8 +6,8 @@ services:
   app: 
     container_name: deploy-guide
     build:
-      context: .
-      dockerfile: Dockerfile
+      context: ../
+      dockerfile: ./SC_statistic/Dockerfile
     ports:
       - "80:80"
     networks:

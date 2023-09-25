@@ -27,6 +27,8 @@ namespace SC_statistic
                 .AddNewtonsoftJson();
             builder.Services.AddAntiforgery(options => { options.SuppressXFrameOptionsHeader = true; });
 
+
+            AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
             string connection = builder.Configuration.GetConnectionString("PostgresSQL");
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
             options.UseNpgsql(connection));
