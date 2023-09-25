@@ -27,13 +27,9 @@ namespace SC_statistic
                 .AddNewtonsoftJson();
             builder.Services.AddAntiforgery(options => { options.SuppressXFrameOptionsHeader = true; });
 
-            string connection = builder.Configuration.GetConnectionString("MySqlConnection");
-            string version = builder.Configuration.GetConnectionString("MySqlVersion");
+            string connection = builder.Configuration.GetConnectionString("PostgresSQL");
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
-            options.UseMySql(connection, ServerVersion.Parse(version), mysqlOptions =>
-            {
-                mysqlOptions.EnableRetryOnFailure(maxRetryCount: 5, maxRetryDelay: TimeSpan.FromSeconds(30), errorNumbersToAdd: null);
-            }));
+            options.UseNpgsql(connection));
 
             builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(options =>
@@ -84,26 +80,6 @@ namespace SC_statistic
                 app.UseExceptionHandler("/Home/Error");
                 app.UseHsts();
             }
-
-            ////
-            if (args.Contains("migrate"))
-            {
-                using (var scope = app.Services.CreateScope())
-                {
-                    var services = scope.ServiceProvider;
-                    try
-                    {
-                        var dbContext = services.GetRequiredService<ApplicationDbContext>();
-                        dbContext.Database.Migrate();
-                    }
-                    catch (Exception ex)
-                    {
-                        var logger = services.GetRequiredService<ILogger<Program>>();
-                        logger.LogError(ex, "An error occurred while migrating the database.");
-                    }
-                }
-            }
-            ///
             
 
             app.UseHttpsRedirection();

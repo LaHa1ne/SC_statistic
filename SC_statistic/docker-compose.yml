@@ -1,43 +1,31 @@
-﻿version: '3.9'
-
+﻿version: "3.9"
 networks:
   deploy-guide-dev:
-
+    driver: bridge
 services:
-  app:
-    #image: mcr.microsoft.com/dotnet/aspnet:6.0 
-    container_name: SC_stat_app
+  app: 
+    container_name: deploy-guide
     build:
-      context: ../
-      dockerfile: ./SC_Statistic/Dockerfile
+      context: .
+      dockerfile: Dockerfile
     ports:
-      - "80:80"  
+      - "80:80"
     networks:
       - deploy-guide-dev
     depends_on:
-      - db
+      - postgres_db
+  postgres_db:
+    container_name: postgres
+    image: postgres:latest
     environment:
-      - ASPNETCORE_ENVIRONMENT=docker
-    command: ["migrate"]
-
-    #environment:
-    # - PROJECT_PATH=/app/SC_statistic  # Относительный путь к проекту
-    #volumes:
-    #  - ./AspNetCoreApp:/app/SC_statistic  # Используйте относительный путь к вашему проекту ASP.NET Core
-
-  db:
-    image: mysql:8.0.33
-    container_name: mysql_db
-    restart: always
-    ports: 
-      - 3307:3306
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123
+      POSTGRES_DB: deploy-guide
+    ports:
+      - "5432:5432"
     networks:
       - deploy-guide-dev
-    environment:
-      MYSQL_ROOT_PASSWORD: Rb,thhNhjkm2000  
-      MYSQL_DATABASE: st_statistic_db  
     volumes:
-      - mysql-data:/var/lib/my-sql/data
-
+      - postgres-data:/var/lib/postgresql/data
 volumes:
-  mysql-data:
+  postgres-data:
